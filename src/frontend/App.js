@@ -1,6 +1,7 @@
 // import { TodoListView, TaskList } from './TodoListView.js';
 import { Events } from './Events.js';
 import { NavBar } from './Navbar.js';
+import { Store } from './Store.js'
 
 export class App {
   #todolistViewElm = null;
@@ -19,10 +20,22 @@ export class App {
     // const loginPageInner = loginPageElm.innerHTML;
     const emailInputElm = document.getElementById("emailInput");
     const buttonElm = document.getElementById("next");
+    const store = Store.store();
 
     buttonElm.addEventListener("click", async () => {
       console.log(emailInputElm.value);
       if (emailInputElm.value.slice(-10) === "@umass.edu") {
+        // setting and storing the user in the local database
+        store.set("users", []);
+        const userObj = {id: emailInputElm.value};
+        const fakeUserOne = {id: "user1@umass.edu"};
+        const fakeUserTwo = {id: "user2@umass.edu"};
+        const tempArr = store.get("users");
+        tempArr.push(userObj);
+        tempArr.push(fakeUserOne);
+        tempArr.push(fakeUserTwo);
+        store.set("users", tempArr);
+
         rootElm.innerHTML = "";
 
         const navbarElm = document.createElement('div');
