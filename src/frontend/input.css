@@ -5,3 +5,19 @@
 .con {
     @apply h-full;
 }
+
+header {
+    @apply bg-red-800;
+}
+
+nav {
+    @apply flex justify-between items-center mx-auto;
+}
+
+#navbar ul {
+    @apply flex items-center gap-[4vw];
+}
+
+#navbar a {
+    @apply hover:text-black text-white;
+}
