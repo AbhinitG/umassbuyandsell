@@ -36,7 +36,7 @@ export class NavBar {
                   <a href="#myposts">My Posts</a>
                 </li>
                 <li class="mr-3">
-                  <a href="#logout">Log Out</a>
+                  <a id="reset-state" href="#logout">Log Out</a>
                 </li>
               </ul>
             </div>

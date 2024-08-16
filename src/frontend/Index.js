@@ -4,7 +4,7 @@ import { App } from './App.js';
 const app = new App();
 await app.render('root');
 
-// Testing Support
+//Testing Support
 // const resetState = () => {
 //   localStorage.clear();
 //   const app = new App();

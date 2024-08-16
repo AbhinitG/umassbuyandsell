@@ -21,3 +21,44 @@ nav {
 #navbar a {
     @apply hover:text-black text-white;
 }
+
+.post_container {
+    @apply max-w-screen-lg mx-auto p-4;
+}
+
+.product_container {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 border-2 border-red-800 shadow-lg p-4 rounded-lg bg-gray-200;
+}
+
+.product_image_container {
+    @apply flex justify-center;
+}
+
+.product_image_container img {
+    @apply w-3/4 h-auto max-w-xs border-2 border-black rounded;
+}
+
+.product_details {
+    @apply flex flex-col space-y-4;
+}
+
+.product_title {
+    @apply text-2xl font-semibold text-gray-800;
+
+}
+
+.product_price {
+    @apply text-3xl font-bold text-red-800;
+}
+
+.product_description {
+    @apply text-gray-700;
+}
+
+.seller_email_container {
+    @apply text-gray-800 font-semibold;
+}
+
+.seller_email {
+    @apply text-blue-500 hover:underline;
+}

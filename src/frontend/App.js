@@ -1,10 +1,10 @@
-// import { TodoListView, TaskList } from './TodoListView.js';
+import { ProductView } from './ProductView.js';
 import { Events } from './Events.js';
 import { NavBar } from './Navbar.js';
 import { Store } from './Store.js'
 
 export class App {
-  #todolistViewElm = null;
+  #productViewElm = null;
   #mainViewElm = null;
   #events = null;
 
@@ -21,19 +21,15 @@ export class App {
     const emailInputElm = document.getElementById("emailInput");
     const buttonElm = document.getElementById("next");
     const store = Store.store();
+    store.set("users", [{id: "user1@umass.edu"}, {id: "user2@umass.edu"}]);
 
     buttonElm.addEventListener("click", async () => {
       console.log(emailInputElm.value);
       if (emailInputElm.value.slice(-10) === "@umass.edu") {
-        // setting and storing the user in the local database
-        store.set("users", []);
+        // setting and storing the new user in the local database
         const userObj = {id: emailInputElm.value};
-        const fakeUserOne = {id: "user1@umass.edu"};
-        const fakeUserTwo = {id: "user2@umass.edu"};
         const tempArr = store.get("users");
         tempArr.push(userObj);
-        tempArr.push(fakeUserOne);
-        tempArr.push(fakeUserTwo);
         store.set("users", tempArr);
 
         rootElm.innerHTML = "";
@@ -43,65 +39,58 @@ export class App {
         const navbar = new NavBar();
         navbarElm.appendChild(await navbar.render());
 
+        this.#mainViewElm = document.createElement('div');
+        this.#mainViewElm.id = 'main-view';
+
         rootElm.appendChild(navbarElm);
+        rootElm.appendChild(this.#mainViewElm);
+
+        const productView = new ProductView();
+        this.#productViewElm = await productView.render();
+        this.#navigateTo('browse');
+
+        this.#events.subscribe('navigateTo', view => this.#navigateTo(view));
       }
     });
-
-    // const navbarElm = document.createElement('div');
-    // navbarElm.id = 'navbar';
-    // const navbar = new NavBar();
-    // navbarElm.appendChild(await navbar.render());
-
-    // this.#mainViewElm = document.createElement('div');
-    // this.#mainViewElm.id = 'main-view';
-
-    // rootElm.appendChild(navbarElm);
-    // rootElm.appendChild(this.#mainViewElm);
-
-    // const todoListView = new TodoListView();
-    // this.#todolistViewElm = await todoListView.render();
-    // this.#navigateTo('todolist');
-
-    // this.#events.subscribe('navigateTo', view => this.#navigateTo(view));
   }
 
   async #navigateTo(view) {
     this.#mainViewElm.innerHTML = '';
-    if (view === 'todolist') {
-      this.#mainViewElm.appendChild(this.#todolistViewElm);
+    if (view === 'browse') {
+      this.#mainViewElm.appendChild(this.#productViewElm);
       window.location.hash = view;
-    } else if (view === 'archive') {
-      console.log('It gets here');
-      // TODO: this is where we want to add the archive view
-      // Archive List View
-      const archive = document.createElement('div');
-      archive.id = 'archive-list-view';
-
-      const titleElm = document.createElement('h1');
-      titleElm.innerText = 'Archive View';
-
-      const archiveListContainerElm = document.createElement('div');
-      archiveListContainerElm.id = 'archive-list-container';
-
-      archive.appendChild(titleElm);
-      archive.appendChild(archiveListContainerElm);
-
-      // archive.innerHTML = '<h1>Archive view (coming soon)</h1>';
-      // Archive List 
-      const archiveListElm = document.createElement('div');
-      archiveListElm.id = 'archive-list';
-
-      const archiveTaskList = new TaskList();
-      const archiveTaskListElm = await archiveTaskList.archive_render();
-      archiveListElm.appendChild(archiveTaskListElm);
-
-      archive.appendChild(archiveListElm);
-
-      this.#mainViewElm.appendChild(archive);
+    } else if (view === 'create') {
+      const create = document.createElement('div');
+      create.innerHTML = '<h1>Create view (coming soon)</h1>';
+      this.#mainViewElm.appendChild(create);
+      // this.#mainViewElm.appendChild(this.#todolistViewElm);
       window.location.hash = view;
-    } else {
-      this.#mainViewElm.appendChild(this.todolist);
-      window.location.hash = 'todolist';
+    }
+    else if (view === "create") {
+      const create = document.createElement('div');
+      create.innerHTML = '<h1>Create view (coming soon)</h1>';
+      this.#mainViewElm.appendChild(create);
+      // this.#mainViewElm.appendChild(this.#todolistViewElm);
+      window.location.hash = view;
+    } 
+    else if (view === "myposts") {
+      const myPosts = document.createElement('div');
+      myPosts.innerHTML = '<h1>My Posts view (coming soon)</h1>';
+      this.#mainViewElm.appendChild(myPosts);
+      // this.#mainViewElm.appendChild(this.#todolistViewElm);
+      window.location.hash = view;
+    }
+    else if (view === "logout") {
+      localStorage.clear();
+      const app = new App();
+      await app.render('root');
+    }
+    else {
+      const browse = document.createElement('div');
+      browse.innerHTML = '<h1>Browse view (coming soon)</h1>';
+      this.#mainViewElm.appendChild(browse);
+      // this.#mainViewElm.appendChild(this.#todolistViewElm);
+      window.location.hash = view;
     }
   }
 }
