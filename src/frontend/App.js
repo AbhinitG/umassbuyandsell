@@ -21,13 +21,12 @@ export class App {
     const emailInputElm = document.getElementById("emailInput");
     const buttonElm = document.getElementById("next");
     const store = Store.store();
-    store.set("users", [{id: "user1@umass.edu"}, {id: "user2@umass.edu"}]);
+    store.set("users", [{id: "user1@umass.edu", posts: [{id: Math.random().toString(36), image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwNiAqRnzwKt1nLUpWkRKEYzVCsU9QafUmcw&s', title: 'Grey Chair', price: '$25.00', description: 'This is a brief description of the grey chair. It is in good condition and very comfortable.', seller: 'user1@umass.edu'}]}, {id: "user2@umass.edu", posts: [{id: Math.random().toString(36), image: 'https://i5.walmartimages.com/seo/MERITLIFE-Modern-Sofa-Couch-Solid-Wood-Frame-Living-Room-Furniture-Removable-Back-Cushion-Seat-Cushion-Blue-88-58-Wide-3-Seater_2bdca44b-2f6f-4042-8297-8f7dc1e6abf6.42786963f0ff80bcb6ae30e61b0bfde5.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF', title: 'Grey Sofa', price: '$100.00', description: 'This is a brief description of the grey sofa. It is in good condition and very comfortable. It is a must have.', seller: 'user2@umass.edu'}]}]);
 
     buttonElm.addEventListener("click", async () => {
-      console.log(emailInputElm.value);
       if (emailInputElm.value.slice(-10) === "@umass.edu") {
         // setting and storing the new user in the local database
-        const userObj = {id: emailInputElm.value};
+        const userObj = {id: emailInputElm.value, posts: []};
         const tempArr = store.get("users");
         tempArr.push(userObj);
         store.set("users", tempArr);

@@ -592,6 +592,22 @@ video {
   position: static;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.bottom-4 {
+  bottom: 1rem;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
 .-mb-1 {
   margin-bottom: -0.25rem;
 }
@@ -646,6 +662,10 @@ video {
 
 .w-7\/12 {
   width: 58.333333%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .items-center {
@@ -744,6 +764,10 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 .filter {
@@ -872,4 +896,13 @@ nav {
 
 .seller_email:hover {
   text-decoration-line: underline;
+}
+
+.deleteButton {
+  pointer-events: none;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: not-allowed;
+  opacity: 0;
 }

@@ -62,3 +62,7 @@ nav {
 .seller_email {
     @apply text-blue-500 hover:underline;
 }
+
+.deleteButton {
+    @apply opacity-0 cursor-not-allowed pointer-events-none absolute bottom-4 right-4;
+}
