@@ -66,3 +66,23 @@ nav {
 .deleteButton {
     @apply opacity-0 cursor-not-allowed pointer-events-none absolute bottom-4 right-4;
 }
+
+.create_container {
+    @apply max-w-3xl mx-auto p-6 bg-white border border-red-800 shadow-lg rounded-lg mt-5;
+}
+
+.create_input_container {
+    @apply mb-6;
+}
+
+.create_label {
+    @apply block text-sm font-medium text-gray-700;
+}
+
+.create_input {
+    @apply mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500;
+}
+
+.createButton {
+    @apply bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-950 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}

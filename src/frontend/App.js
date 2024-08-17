@@ -1,10 +1,12 @@
-import { ProductView } from './ProductView.js';
+import { ProductView, CreateView, MyPostsView } from './ProductView.js';
 import { Events } from './Events.js';
 import { NavBar } from './Navbar.js';
 import { Store } from './Store.js'
 
 export class App {
   #productViewElm = null;
+  #createViewElm = null;
+  #myPostsViewElm = null;
   #mainViewElm = null;
   #events = null;
 
@@ -30,6 +32,7 @@ export class App {
         const tempArr = store.get("users");
         tempArr.push(userObj);
         store.set("users", tempArr);
+        store.set('current_user', emailInputElm.value);
 
         rootElm.innerHTML = "";
 
@@ -48,6 +51,9 @@ export class App {
         this.#productViewElm = await productView.render();
         this.#navigateTo('browse');
 
+        const createView = new CreateView();
+        this.#createViewElm = await createView.render();
+
         this.#events.subscribe('navigateTo', view => this.#navigateTo(view));
       }
     });
@@ -59,24 +65,13 @@ export class App {
       this.#mainViewElm.appendChild(this.#productViewElm);
       window.location.hash = view;
     } else if (view === 'create') {
-      const create = document.createElement('div');
-      create.innerHTML = '<h1>Create view (coming soon)</h1>';
-      this.#mainViewElm.appendChild(create);
-      // this.#mainViewElm.appendChild(this.#todolistViewElm);
-      window.location.hash = view;
-    }
-    else if (view === "create") {
-      const create = document.createElement('div');
-      create.innerHTML = '<h1>Create view (coming soon)</h1>';
-      this.#mainViewElm.appendChild(create);
-      // this.#mainViewElm.appendChild(this.#todolistViewElm);
+      this.#mainViewElm.appendChild(this.#createViewElm);
       window.location.hash = view;
     } 
     else if (view === "myposts") {
-      const myPosts = document.createElement('div');
-      myPosts.innerHTML = '<h1>My Posts view (coming soon)</h1>';
-      this.#mainViewElm.appendChild(myPosts);
-      // this.#mainViewElm.appendChild(this.#todolistViewElm);
+      const myPostView = new MyPostsView();
+      this.#myPostsViewElm = await myPostView.render();
+      this.#mainViewElm.appendChild(this.#myPostsViewElm);
       window.location.hash = view;
     }
     else if (view === "logout") {
