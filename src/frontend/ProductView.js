@@ -256,7 +256,7 @@ class MyPosts {
     deleteButton.disabled = false;  // Initially disabled
     deleteButton.textContent = 'Delete';
 
-    // deleteButton.addEventListener("click", () => {
+    // deleteButton.addEventListener("click", async () => {
       
     // });
 
